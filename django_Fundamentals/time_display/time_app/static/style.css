@@ -1,0 +1,28 @@
+
+#clock{
+    padding-left: 43px;
+}
+
+.title{
+    padding: 20px;
+    border: solid 3px black;
+    margin-bottom: 40px;
+
+}
+
+.timestamp{
+    border: solid 3px black;
+    padding: 10px 300px;
+}
+body {
+    background-color: gray;
+}
+#wrapper {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 970px;
+    margin: auto;
+
+}

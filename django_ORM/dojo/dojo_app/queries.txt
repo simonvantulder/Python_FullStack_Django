@@ -1,0 +1,27 @@
+>>> from dojo_app.models import *
+>>> Dojo.objects.create(name="Coding Dojo", city="Bellevue", state = "WA")
+<Dojo: Dojo object (1)>
+>>> Dojo.objects.create(name="Other Dojo", city="San Jose", state = "CA")
+<Dojo: Dojo object (2)>
+>>> Dojo.objects.create(name="East Coding Dojo", city="New York City", state = "NY")
+<Dojo: Dojo object (3)>
+
+to_delete = Dojo.objects.all()	
+to_delete.delete()
+
+>>> Dojo.objects.create(name="Coding Dojo", city="Bellevue", state = "WA")
+<Dojo: Dojo object (4)>
+>>> Dojo.objects.create(name="Other Dojo", city="San Jose", state = "CA")
+<Dojo: Dojo object (5)>
+>>> Dojo.objects.create(name="East Coding Dojo", city="New York City", state = "NY")
+<Dojo: Dojo object (6)>
+
+Ninja.objects.create(first_name="Cedric", city="New York City", state = "NY", age="27", last_name="Razano", dojo = ECD )
+
+to_update = Ninja.objects.get(id=3)
+>>> to_update.dojo = HQ
+>>>to_update.save
+
+Ninja.objects.get(id=6).dojo.name
+
+HQ.ninjas.all()

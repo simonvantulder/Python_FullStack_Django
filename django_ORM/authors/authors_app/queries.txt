@@ -1,0 +1,39 @@
+(djangoPy3Env) simonvantulder@Simons-MacBook-Pro authors % python manage.py makemigrations 
+(djangoPy3Env) simonvantulder@Simons-MacBook-Pro authors % python manage.py migrate        
+
+
+>>> Book.objects.create(title="C Sharp", desc="early programming language")
+<Book: < C Sharp (1)>>
+
+>>> Author.objects.create(first_name="Diamondra", last_name="Pedroso")
+<Author: < Diamondra Pedroso (3)>>
+
+
+>>> update = Author.objects.get(id=1)
+>>> update.first_name = "John"
+>>> update.save()   #must do update function in multiple lines otherwise it grabs the frield name instead of the object and it doesnt actually know what its updating
+
+>>> update = Book.objects.get(id=1)
+>>> update.name="HTML"   #must do update function in multiple lines otherwise it grabs the frield name instead of the object and it doesnt actually know what its updating
+>>> update.save()
+>>> 
+
+
+>>> this_book = Book.objects.get(id=4)
+>>> this_author = Author.objects.get(id=2)
+
+>>> this_book = Book.objects.get(id=1)
+>>> this_author.books.add(this_book)
+>>> this_book = Book.objects.get(id=2)
+>>> this_author.books.add(this_book)
+>>> this_book = Book.objects.get(id=3)
+>>> this_author.books.add(this_book)
+>>> this_book = Book.objects.get(id=4)
+>>> this_author.books.add(this_book)
+>>> this_book = Book.objects.get(id=5)
+>>> this_author.books.add(this_book)
+#cant do this all at once (must use for loop or manually/individually) otherwise you end up trying to add a query set instead of indivual objects 
+
+this_book.authors.all()  #retireve connected authors 
+
+this_author.books.all() #retrieve connected books

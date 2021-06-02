@@ -1,0 +1,62 @@
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+    <title>Never Had It Show Good</title>
+</head>
+
+<body>
+    <div id="wrapper">
+        <header>
+            <h1 class="text-success">CodingDojo Wall</h1>
+            <div>
+                <h3>Welcome {{user.first_name}} {{user.last_name}}</h3>
+                <a href="/logout">Logout</a>
+            </div>
+            <div>
+                <h2>Post a message</h2>
+                <form action="/message/new" method="post">
+                    {%csrf_token%}
+                    <textarea name="content" id="" cols="30" rows="10"></textarea>
+                    <button>Post a message</button>
+                </form>
+            </div>
+        </header>
+        <main>
+            {%for message in messages%} <!-- is the .all needed???...depends on if you pass it-->
+                <div class="message">
+                        <p>{{message.user.first_name}} {{message.user.last_name}} {{message.created_at}}</p>
+                        <p>{{message.content}}</p>
+                        <div class="comment">
+                            {% for comment in message.comments.all %}
+                                <p>{{comment.person.first_name}} {{comment.person.last_name}} {{comment.created_at}}</p>
+                                <p>{{comment.content}}</p>
+                            {% endfor %}
+                        </div>
+
+                </div>
+                <div>
+                    <h2>Post a comment</h2>
+                    <form action="/comment/new" method="post">
+                        {%csrf_token%}
+                        <input type="hidden" name="post_id" value="{{message.id}}">
+
+                        <label for="content">Post a Comment</label>
+                        <input type="text" name="content" id="">
+                        <button>Post a comment</button>
+                    </form>
+                </div>
+            {% endfor %}
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

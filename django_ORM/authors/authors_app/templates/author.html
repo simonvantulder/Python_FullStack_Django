@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'instance_styling.css' %}">
+
+    <title>Try Sarah Topps</title>
+</head>
+
+<body>
+    <div id="wrapper">
+        <div class="tab upper">
+
+            <h1>{{author.first_name}} {{author.last_name}}</h1>
+            <p>ID:{{author.id}}</p>
+            <p>Notes:{{author.text}}</p>
+        </div>
+        <div class="tab lower">
+
+                <p>Books Written:</p>
+                <ul>
+                    {% for writing in writings %} 
+                    <li>{{writing.title}}</li>
+                    {% endfor %}
+                </ul>
+            
+            <form action="/authors/add/book" method="post">
+                {%csrf_token%}
+                <input type="hidden" name="ID" value="{{author.id}}">
+
+                <select name="ISBN" id="">
+                    {%for book in books%}
+                    <option value="{{book.id}}">{{book.title}}</option>
+                    {%endfor%}
+                </select>
+
+                <button>Add</button>
+            </form>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

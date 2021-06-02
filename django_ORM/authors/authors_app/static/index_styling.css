@@ -1,0 +1,16 @@
+#wrapper{
+    margin: 10;
+    display: flex;
+    align-items: space-between;
+}
+
+.right{
+    margin-top: 30px;
+}
+.tab{
+    margin-top: 50px;
+    margin-left: 50px;
+}
+.view{
+    margin-top: 15px;
+}

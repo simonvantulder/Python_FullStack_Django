@@ -1,0 +1,55 @@
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'new_show_styling.css' %}">
+
+    <title>Never Had It Show Good</title>
+</head>
+
+<body>
+    <div id="wrapper">
+
+            <h1>Edit Show {{show.id}}</h1>
+            <a href="/shows"></a>
+            <form action="/shows/{{show.id}}/update" method="post">
+                {%csrf_token%}
+                <div>
+                    <p>Title</p>
+                    <input type="text" name="title">
+                </div>
+                <div class="flex">
+                    <div>
+                        <p>Network</p>
+                        <input type="text" name="network">
+                    </div>
+                    <div class="tab">
+                        <p>Release Date</p>
+                        <input type="date" name="release_date" id="">
+                    </div>
+                </div>
+                <div>
+                    <p>Description</p>
+                    <input type="text" name="description">
+                </div>
+                <button>Update</button>
+            </form>
+            <button class="view" onclick="location.href='/show/{{show.id}}'" role="link" data-href="/">Go to Show</button>
+            {% if messages %}
+                <ul class="messages">    
+                    {% for message in messages %}    
+                        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

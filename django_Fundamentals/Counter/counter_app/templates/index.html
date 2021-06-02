@@ -1,0 +1,29 @@
+<!-- <p>Name in session is: {{request.session.name}}</p> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+    #wrapper{
+        width: 970px;
+        margin: auto;
+    }
+</style>
+</head>
+<body>
+    <div id="wrapper">
+
+        <p>Counter:</p>
+        <p> {{request.session.counter}}</p>
+        <p>Times visited Page:</p>
+        <p> {{request.session.pageCounter}}</p>
+        <button onclick="location.href='/'" role="link" data-href="/">Clear Counter</button>
+        <button onclick="location.href='/index2'" role="link" data-href="/index2">Increment Counter by 2</button>
+
+    </div>
+    
+</body>
+</html>

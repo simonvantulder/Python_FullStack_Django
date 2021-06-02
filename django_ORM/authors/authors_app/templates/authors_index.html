@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'index_styling.css' %}">
+
+    <title>Looking For Dinosaur Authors?</title>
+</head>
+
+<body>
+    <div id="wrapper">
+        <div>
+            <h1>Add an Author</h1>
+            <form action="/authors/create" method="post">
+                {%csrf_token%}
+                <p>
+                    First Name
+                    <input type="text" name="first_name">
+                </p>
+                <p>
+                    Last Name
+                    <input type="text" name="last_name">
+                </p>
+                <p>
+                    Notes
+                    <input type="text" name="notes">
+                </p>
+                <button>Add</button>
+            </form>
+            <button onclick="location.href='/'" role="link" data-href="/">Go back to books</button>
+        </div>
+        <div class="right">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for author in authors%}
+                    <tr>
+                        <td>{{author.id}}</td>
+                        <td>{{author.first_name}} {{author.last_name}}</td>
+                        <td><a href="/authors/{{author.id}}">View</a></td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

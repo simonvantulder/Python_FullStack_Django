@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'styling.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <div id="wrapper">
+        <p>Your Gold: <span>{{request.session.gold_count}}</span></p>
+        
+        <main>
+            <div class="harvest">
+                <h2>Farm</h2>
+                <p>(earns 10-20 gold)</p>
+                <form action="/process" method="POST">
+                    {%csrf_token%}
+                    <input type="hidden" name="box" value="farm">
+                    <button onclick="location.href='/proces'" role="link" data-href="/process">Find Gold</button>
+                </form>
+            </div>
+
+            <div class="harvest">
+                <h2>Cave</h2>
+                <p>(earns 5-10 gold)</p>
+                <form action="/process" method="POST">
+                    {%csrf_token%}
+                    <input type="hidden" name="box" value="cave">
+                    <button onclick="location.href='/proces'" role="link" data-href="/process">Find Gold</button>
+                </form>
+            </div>
+
+            <div class="harvest">
+                
+                <h2>House</h2>
+                <p>(earns 2-5 gold)</p>
+                <form action="/process" method="POST">
+                    {%csrf_token%}
+                    <input type="hidden" name="box" value="house">
+                    <button onclick="location.href='/process'" role="link" data-href="/process">Find Gold</button>
+                </form>
+            </div>
+            <div class="harvest">
+                <h2>Casino</h2>
+                <p>(earns/takes 0-50 gold)</p>
+                <form action="/process" method="POST">
+                    {%csrf_token%}
+                    <input type="hidden" name="box" value="casino">
+                    <button onclick="location.href='/process_'" role="link" data-href="/process">Find Gold</button>
+                </form>
+            </div>
+        </main>
+        <footer>
+            <h4>Activities</h4>
+            <ul>
+                {%for activity in request.session.activities%}
+                <li>{{ activity }} </li>
+                {%endfor%}
+                
+            </ul>
+            <h5>number of turns: {{request.session.attempts}}</h5>
+        </footer>
+    </div>
+    </body>
+</html>

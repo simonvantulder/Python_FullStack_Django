@@ -1,0 +1,13 @@
+User.objects.create(fields/attributes="something", fields/attributes2="something else") //create User
+User.objects.all() //call all objects in dictionary
+User.objects.all().first().__dict__ //call first object in dictionary
+User.objects.last()//call last object in dictionary
+User.objects.get(3)//call object with id ==3 in dictionary
+
+c = User.objects.get(id=3)
+c.last_name = "jackson"
+c.save()
+
+movie_to_delete = User.objects.get(id=2)	# let's retrieve a single movie,
+movie_to_delete.delete()
+

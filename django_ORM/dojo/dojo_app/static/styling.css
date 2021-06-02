@@ -1,0 +1,28 @@
+#wrapper{
+    margin: auto;
+
+}
+body{
+    padding: 0;
+    margin: 0;
+}
+header{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 15px 0;
+}
+main{
+    border-top: solid 1px black;
+    padding-top: 15px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+button{
+    width: 100px;
+    font-size: smaller;
+    margin-left: 10px;
+}
+.dojo_name{
+    display: flex;
+}

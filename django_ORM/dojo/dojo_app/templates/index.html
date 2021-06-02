@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'styling.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Dojos & Ninjas</title>
+</head>
+
+<body>
+    <div id="wrapper">
+
+        <header>
+            <div class="addDojo">
+                <h2>Add a Dojo</h2>
+                <form action="/dojos/new" method="POST">
+                    {%csrf_token%}
+                    
+                    <p>
+                        Name:
+                        <input type="text" name="name">
+                    </p>
+                    <p>
+                        City:
+                        <input type="text" name="city">
+                    </p>
+                    <p>
+                        State:
+                        <input type="text" name="state">
+                    </p>
+                    <button>Add</button>
+                </form>
+            </div>
+            <div class="addNinja">
+            
+                <h2>Add a Ninja</h2>
+                <form action="/ninjas/new" method="POST">
+                    {%csrf_token%}
+    
+                    <p>
+                        First Name:
+                        <input type="text" name="first_name">
+                    </p>
+                    <p>
+                        Last Name:
+                        <input type="text" name="last_name">
+                    </p>
+                    <p>
+                        Dojo:
+                        <select name="dojo_id" id="">
+                            {%for dojo in dojos%}
+                                <option value="{{dojo.id}}">{{dojo.name}}</option>
+                            {%endfor%}
+                        </select>
+    
+                    </p>
+                    <button>Add</button>
+                </form>
+                
+            </div>
+        </header>
+        <main>
+            <h1>All the Dojos</h1>
+            {%for dojo in dojos%}
+            <div class="dojo_name">
+
+                <p>{{dojo.ninjas.count}} Ninjas at the {{dojo.name}} </p> 
+                <form action="/dojos/delete" method="post"> 
+                    {% csrf_token %}
+                    <input type="hidden" name="delete_id" value="{{dojo.id}}">
+                    <button>Delete Dojo</button>
+                </form> 
+            </div>
+
+                <ul>
+                    {% for ninjas in dojo.ninjas.all %}
+                    <li>{{ninjas.first_name}} {{ninjas.last_name}}</li>
+                    {%endfor%}
+                </ul>
+            {%endfor%}
+    
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+</body>
+
+</html>

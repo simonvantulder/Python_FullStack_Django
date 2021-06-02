@@ -1,0 +1,32 @@
+*{
+margin: 0;
+padding: 0;
+}
+#wrapper{
+    width: 970px;
+    margin: auto;
+    /* margin: 10; */
+    display:flex;
+    flex-direction: column;
+}
+.flex{
+
+    display: flex;
+    align-items: space-between;
+}
+
+.tab{
+
+    /* margin-top: 50px; */
+    margin-left: 50px;
+}
+.view{
+    margin-top: 15px;
+}
+p{
+    margin-top: 20px;
+}
+button{
+    margin: 20px 50px;
+    padding: 4px;
+}

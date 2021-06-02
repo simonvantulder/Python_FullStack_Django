@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+        <style>
+            #wrapper{
+                width: 970px;
+                margin: auto;
+            }
+            .underline{
+                border-bottom: solid 1px black;
+                width: 105px;
+            }
+            /* a{
+                width: 50px;   button used to be "a" tag (href)
+            } */
+            .purple{
+                background-color: purple;
+            }
+        </style>
+
+    <div id="wrapper">
+        <p class="underline">Submitted Info:</p>
+        <p>test</p>
+        
+        <p>{{name_template}}</p>
+        <p>{{location_template}}</p>
+        <p>{{language_template}}</p>
+        {%for instructor in instructors_template%}
+            <p>{{instructor}}</p>   
+        {%endfor%}
+        <p>{{activity_template}}</p>
+        <p>{{comment_template}}</p>
+
+        
+        <button onclick="location.href='/index'" role="link" data-href="/">Go back</button>
+    </div>
+    
+</body>
+</html>
