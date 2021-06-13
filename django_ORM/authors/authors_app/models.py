@@ -1,6 +1,8 @@
 from django.db import models
 
-class Book(models.Model):
+    # create a website that allows users to register books and their associated authors and give reviews
+    # associate books w authors so a user can look up books by author or other books by the same author
+class Book(models.Model): 
     title = models.CharField(max_length=100)
     desc = models.CharField(max_length=250,)
 
