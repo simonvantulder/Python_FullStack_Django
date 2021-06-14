@@ -15,7 +15,7 @@ def index(request):
 
     return render(request,"index.html")
 
-def process(request): # depending on the activity selected by the user, displau the resulting gold earned/lost
+def process(request): # depending on the activity selected by the user, display the resulting gold earned/lost
     if request.POST['box'] =='farm':
         gold_gained = random.randint(10,20)
         request.session['gold_count'] += gold_gained

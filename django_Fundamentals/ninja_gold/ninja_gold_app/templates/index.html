@@ -10,9 +10,10 @@
 </head>
 <body>
     <div id="wrapper">
-        <p>Your Gold: <span>{{request.session.gold_count}}</span></p>
+        <p>Your Gold: <span>{{request.session.gold_count}}</span></p> <!--display user's gold amt-->
         
         <main>
+            <!-- display Farm action, earns random # btwn 10-20 gold on button click -->
             <div class="harvest">
                 <h2>Farm</h2>
                 <p>(earns 10-20 gold)</p>
@@ -23,6 +24,7 @@
                 </form>
             </div>
 
+            <!-- display Mine Cave Action for jewels/treasure earns random # btwn 5-10 gold-->
             <div class="harvest">
                 <h2>Cave</h2>
                 <p>(earns 5-10 gold)</p>
@@ -35,7 +37,8 @@
 
             <div class="harvest">
                 
-                <h2>House</h2>
+            <!-- display Search House couch cushions action, earns random # btwn 2-5 gold on button click -->
+            <h2>House</h2>
                 <p>(earns 2-5 gold)</p>
                 <form action="/process" method="POST">
                     {%csrf_token%}
@@ -43,9 +46,11 @@
                     <button onclick="location.href='/process'" role="link" data-href="/process">Find Gold</button>
                 </form>
             </div>
+
+            <!-- display Casino action, earns/takes random # btwn +/-50 gold on button click -->
             <div class="harvest">
                 <h2>Casino</h2>
-                <p>(earns/takes 0-50 gold)</p>
+                <p>(earns/takes +/-50 gold)</p>
                 <form action="/process" method="POST">
                     {%csrf_token%}
                     <input type="hidden" name="box" value="casino">
@@ -55,12 +60,13 @@
         </main>
         <footer>
             <h4>Activities</h4>
-            <ul>
+            <ul> <!-- display all the activities performed-->
                 {%for activity in request.session.activities%}
                 <li>{{ activity }} </li>
                 {%endfor%}
                 
             </ul>
+            <!-- display turns -->
             <h5>number of turns: {{request.session.attempts}}</h5>
         </footer>
     </div>
