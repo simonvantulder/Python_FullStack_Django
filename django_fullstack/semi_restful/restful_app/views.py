@@ -3,22 +3,29 @@ from django.contrib import messages
 from . models import *
 
 
+# display main page
 def index(request):
     context = {
-        "shows": Show.objects.all(), #returns a list of every dojo in DB
+        "shows": Show.objects.all(), #returns a list of every tv show in DB
     }
     return redirect("/shows")
 
+
+# display all the tv shows in DB
 def shows(request):
     context = {
-        "shows": Show.objects.all(), #returns a list of every dojo in DB
+        "shows": Show.objects.all(), #returns a list of every tv show in DB
     }
     return render(request, "index.html", context)
 
+
+# display tv show creation form/page
 def add_show(request):
 
     return render(request, "new_show.html")
 
+
+# handle tv show creation
 def create_show(request):
     errors = Show.objects.validator(request.POST)
     print(request.POST["release_date"])
@@ -38,12 +45,16 @@ def create_show(request):
         num = Show.objects.last()
     return redirect(f"/show/{num.id}")
 
+
+# display edit page for tv show
 def edit_show(request, num):
     context = {
         "show": Show.objects.get(id = num)
     }
     return render(request, "edit_show.html", context)
 
+
+# handle tv show update
 def update_show(request, num):
     errors = Show.objects.validator(request.POST)
 
@@ -62,12 +73,16 @@ def update_show(request, num):
 
     return redirect(f"/show/{num}")# change to redirect to the specific show
 
+
+# display single tv show
 def show(request, num):
     context = {
         "show": Show.objects.get(id = num), #returns a specific instance of the show class in DB
     }    
     return render(request, "show.html", context)
 
+
+# remove tv show from database
 def delete_show(request, num):
     this_show = Show.objects.get(id = num)
     this_show.delete()

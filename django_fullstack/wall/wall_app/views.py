@@ -3,6 +3,7 @@ from django.contrib import messages
 from . models import *
 
 
+# display main page
 def dashboard(request):
     if 'uuid' not in request.session:
         return redirect("/")
@@ -15,6 +16,7 @@ def dashboard(request):
         return render (request, "index.html", context)
 
 
+# imitation fb wall, get user and all messages to display
 def wall(request):
     if 'uuid' not in request.session:
         return redirect("/")
@@ -27,6 +29,7 @@ def wall(request):
         return render (request, "wall.html", context)
 
 
+# handle method creation
 def create_message(request):
     if 'uuid' not in request.session:
         return redirect("/")
@@ -41,6 +44,7 @@ def create_message(request):
     return redirect("/dashboard")
 
 
+# handle comment creation
 def create_comment(request):
     if 'uuid' not in request.session:
         return redirect("/")

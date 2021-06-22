@@ -6,6 +6,7 @@ def index(request):
     return render (request, "login_index.html")
 
 
+# handle user creation and password hashing
 def user_create(request):
     errors = User.objects.validator(request.POST)
     
@@ -14,6 +15,7 @@ def user_create(request):
             messages.error(request, value)
         return redirect("/")
     else:
+        # hash password
         hash_browns = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt()).decode()
         user = User.objects.create(
             name = request.POST["name"],
@@ -27,16 +29,17 @@ def user_create(request):
     return redirect ("/books")
 
 
+# dispay user's info
 def user_page(request, id):
     if 'uuid' not in request.session:
         return redirect("/")
-    this_user = User.objects.get(id = id)
     context = {
         "user" : User.objects.get(id = id),
     }
     return render (request, "user_page.html", context)
 
 
+# handle login and password validation
 def login(request):
     errors = User.objects.login_validator(request.POST)
 
@@ -52,6 +55,7 @@ def login(request):
     return redirect("/books")
 
 
+# display books with theri respective reviews and authors
 def books(request):
     if 'uuid' not in request.session:
         return redirect("/")
@@ -67,6 +71,7 @@ def books(request):
         return render (request, "books.html", context)
 
 
+# display add book form/page
 def books_add(request):
     if 'uuid' not in request.session:
         return redirect("/")
@@ -74,6 +79,7 @@ def books_add(request):
     return render(request, "books_add.html")
 
 
+# handle book creation
 def books_create(request):
     Book.objects.create(
         title = request.POST["title"],
@@ -88,6 +94,7 @@ def books_create(request):
     return redirect(f"/books/{num.id}")
 
 
+# display specific book page w author and reviews
 def books_page(request, id):
     if 'uuid' not in request.session:
         return redirect("/")
@@ -102,11 +109,11 @@ def books_page(request, id):
     return render(request, "books_page.html", context)
 
 
+# handle book review reation
 def review_create(request):
     if 'uuid' not in request.session:
         return redirect("/")
 
-    #person = User.objects.get(id = request.session["uuid"])
     Review.objects.create(
         users = User.objects.get(id = request.session["uuid"]),
         book = Book.objects.get(id = request.POST["bookID"]),
@@ -119,6 +126,7 @@ def review_create(request):
     return redirect("/books")
 
 
+# handle like creation
 def like_create(request, id):
     if 'uuid' not in request.session:
         return redirect("/")
@@ -130,12 +138,15 @@ def like_create(request, id):
     return redirect("/books")
 
 
+# handle logout
 def logout(request):
     # print("breaks in logout")
     del request.session['uuid']
     
     return redirect("/")
 
+
+# remove review from database
 def delete_review(request, id):
 
     this_review = Review.objects.get(id = id)
@@ -143,6 +154,7 @@ def delete_review(request, id):
     return redirect("/books")
 
 
+# remove book from database
 def delete_book(request, id):
 
     this_book = Book.objects.get(id = id)

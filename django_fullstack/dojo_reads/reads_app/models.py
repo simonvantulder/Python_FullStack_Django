@@ -16,7 +16,7 @@ class UserManager(models.Manager):
                 errors['email'] = "INVALID CREDENTIALS"
         return errors
 
-
+# validate registration & hash password
     def validator(self, post_data):
         DAYS_FOR_13_YRS=4749
         errors = {}
@@ -72,7 +72,7 @@ class User(models.Model):
 class Book(models.Model):
     title = models.CharField(max_length=100)
     writer = models.CharField(max_length=100)
-    #REVIEWs = 
+
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
 
@@ -80,6 +80,7 @@ class Book(models.Model):
         return f"< {self.title} ({self.id})>"
 
 
+# relate author to respective books
 class Author(models.Model):
     name = models.CharField(max_length=100)
 
@@ -90,6 +91,7 @@ class Author(models.Model):
         return f"< {self.name} ({self.id})>"
 
 
+# relate books to users via likes and reviews left
 class Review(models.Model):
     book = models.ForeignKey("Book", related_name = "reviews", on_delete = models.CASCADE)
     likes = models.ManyToManyField("User", related_name = "likes")
